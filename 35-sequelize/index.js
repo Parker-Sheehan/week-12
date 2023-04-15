@@ -4,6 +4,7 @@ const cors = require('cors')
 const db = require('./util/database')
 const {User, Cart, Product} = require('./util/models')
 const {register} = require('./controller/userController')
+const {addToCart} = require('./controller/cartController')
 const seed = require('./util/seed')
 
 //! Variables
@@ -19,6 +20,8 @@ Product.hasMany(Cart)
 Cart.belongsTo(Product)
 //! endpoints
 server.post('/register', register)
+server.post('addItemToCart', addToCart)
+server.get('/checkout/:userId', checkOut)
 
 
 //! Listen Statement
