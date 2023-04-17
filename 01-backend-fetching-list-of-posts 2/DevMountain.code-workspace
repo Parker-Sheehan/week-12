@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "DevMountain",
+			"path": "../.."
+		},
+		{
+			"path": "../../../../Downloads/react-proj-4"
+		}
+	],
+	"settings": {
+		"emmet.includeLanguages": {
+			"javaScript": "javascriptreact",
+			"markdown": "html"
+		}
+	}
+}

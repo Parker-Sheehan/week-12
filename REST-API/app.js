@@ -1,11 +1,14 @@
+const path = require('path')
 const express = require('express');
-
+const db = require('./util/database')
+const {Post} = require('./util/models')
 const feedRoutes = require('./routes/feed')
 
 const app = express();
 
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use((req,res,next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -16,4 +19,17 @@ app.use((req,res,next) => {
 
 app.use('/feed', feedRoutes)
 
-app.listen(8080)
+app.use((error, req, res, next)=> {
+    console.log(error)
+    const status = error.statusCode || 500;
+    const message = error.message
+    res.status(status).json({message:message})
+})
+
+db
+    .sync()
+    // .sync({force: true})
+    .then(() => {
+        // seed()
+    })
+app.listen(8080, () => console.log('up on 8080'))
