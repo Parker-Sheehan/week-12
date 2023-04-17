@@ -30,7 +30,9 @@ module.exports = {
                     attributes: ["id"]
                 }
             )
-
+            const total = cart.reduce((acc, curr) => {
+                return acc + curr.price
+            },0)
             res.status(200).send(cart)
         }
         catch(err){
